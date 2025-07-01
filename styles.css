@@ -1,0 +1,45 @@
+/* YouTube History Recommender - Subtle Styles */
+
+/* High similarity videos - subtle green accent */
+.yhr-match-high {
+  border-left: 4px solid #4caf50 !important;
+}
+
+/* Medium similarity videos - subtle orange accent */
+.yhr-match-medium {
+  border-left: 4px solid #ff9800 !important;
+}
+
+/* Low similarity videos - subtle blue accent */
+.yhr-match-low {
+  border-left: 4px solid #2196f3 !important;
+}
+
+/* Similarity badge - small and unobtrusive */
+.yhr-badge {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  color: #fff !important;
+  padding: 2px 4px !important;
+  border-radius: 2px !important;
+  font-size: 10px !important;
+  font-weight: normal !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Badge colors for different similarity levels */
+.yhr-match-high .yhr-badge {
+  background: rgba(76, 175, 80, 0.8) !important;
+}
+
+.yhr-match-medium .yhr-badge {
+  background: rgba(255, 152, 0, 0.8) !important;
+}
+
+.yhr-match-low .yhr-badge {
+  background: rgba(33, 150, 243, 0.8) !important;
+} 

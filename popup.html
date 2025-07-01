@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 320px;
+      padding: 16px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+    
+    .header p {
+      margin: 4px 0 0 0;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .status-section {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .status-title {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .status-message {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+    }
+    
+    .controls-section {
+      margin-bottom: 16px;
+    }
+    
+    .train-button {
+      width: 100%;
+      padding: 12px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .train-button:hover {
+      background: #1565c0;
+    }
+    
+    .train-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .procrastination-button {
+      width: 100%;
+      padding: 12px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    
+    .procrastination-button:hover:not(:disabled) {
+      background: #45a049;
+    }
+    
+    .procrastination-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .results-button {
+      width: 100%;
+      padding: 10px;
+      background: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    
+    .results-button:hover {
+      background: #1976d2;
+    }
+    
+    .vids-button {
+      width: 100%;
+      padding: 12px;
+      background: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    
+    .vids-button:hover {
+      background: #e64a19;
+    }
+    
+    .clear-button {
+      width: 100%;
+      padding: 8px;
+      background: #757575;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    
+    .clear-button:hover {
+      background: #616161;
+    }
+    
+    .background-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    
+    .checkbox-label input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.2);
+    }
+    
+    .background-info {
+      font-size: 11px;
+      color: #666;
+      margin-left: 20px;
+      line-height: 1.3;
+    }
+    
+    .results-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .results-content {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 500px;
+      max-height: 70vh;
+      overflow-y: auto;
+      margin: 20px;
+    }
+    
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .video-item {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .video-item:hover {
+      background: #f5f5f5;
+    }
+    
+    .video-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    
+    .video-meta {
+      color: #666;
+      font-size: 12px;
+    }
+    
+    .legend {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .legend-title {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+    
+    .legend-high {
+      background: #00ff00;
+    }
+    
+    .legend-medium {
+      background: #ffaa00;
+    }
+    
+    .legend-low {
+      background: #0088ff;
+    }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 12px;
+      color: #666;
+      font-size: 12px;
+    }
+    
+    .loading.show {
+      display: block;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      border-top-color: #1976d2;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>YouTube History Recommender</h1>
+    <p>Highlights videos similar to your viewing history</p>
+  </div>
+  
+  <div class="status-section">
+    <div class="status-title">Model Status</div>
+    <div class="status-message" id="statusMessage">Checking status...</div>
+  </div>
+  
+  <div class="controls-section">
+        
+    <button class="results-button" id="resultsButton" style="display: none;">
+      Show Recommendations
+    </button>
+
+
+
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      Analyzing your YouTube history...
+    </div>
+    
+    <button class="procrastination-button" id="procrastinationButton" disabled title="Only available on YouTube homepage">
+      Start Auto-scroll
+    </button>
+
+    <button class="clear-button" id="clearButton" style="color: black; background: none;">
+      Clear Recommendations
+    </button>
+
+    <button class="train-button" id="trainButton" style="transform: scale(0.8); background: rgb(221, 221, 221); color: black; margin-top: 28px; width: 50%; margin-left: 25%;">Train Model</button>
+
+
+
+  </div>
+  
+  <div class="background-section">
+    <label class="checkbox-label">
+      <input type="checkbox" id="backgroundRankingCheckbox" checked>
+      Continuous background ranking
+    </label>
+    <div class="background-info" id="backgroundInfo">
+      Automatically collecting recommendations...
+    </div>
+  </div>
+  
+  <div class="legend">
+    <div class="legend-title">Video Highlights</div>
+    <div class="legend-item">
+      <div class="legend-color legend-high"></div>
+      <span>★★★ High similarity (60%+)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color legend-medium"></div>
+      <span>★★ Medium similarity (30-60%)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color legend-low"></div>
+      <span>★ Low similarity (10-30%)</span>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 

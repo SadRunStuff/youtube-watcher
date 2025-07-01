@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube History Recommender",
+  "version": "1.0.0",
+  "description": "Highlights YouTube videos similar to your viewing history",
+  "permissions": [
+    "history",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube History Recommender"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+} 
